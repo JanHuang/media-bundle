@@ -12,7 +12,7 @@
 
   <!-- Font CSS (Via CDN) -->
   <!-- <link rel='stylesheet' type='text/css' href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700'>-->
-
+  {% block plugins_css %}{% endblock %}
   <!-- Theme CSS -->
   <link rel="stylesheet" type="text/css" href="{{ asset('mediaboot/skin/default_skin/css/theme.css') }}">
 
@@ -27,12 +27,11 @@
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
   <![endif]-->
-  {% block css %}
-  {% endblock %}
+  {% block css %}{% endblock %}
 
 </head>
 
-<body class="dashboard-page">
+<body class="{% block body_class %}dashboard-page{% endblock %}">
   <!-- Start: Main -->
   <div id="main">
 
@@ -1323,14 +1322,15 @@
   <!-- End: Main -->
   <script src="{{ asset('mediaboot/vendor/jquery/jquery-1.11.1.min.js') }}"></script>
   <script src="{{ asset('mediaboot/vendor/jquery/jquery_ui/jquery-ui.min.js') }}"></script>
-
+  {% block plugins_js %}{% endblock %}
   <!-- plugins -->
   <script src="{{ asset('mediaboot/vendor/plugins/pnotify/pnotify.js') }}"></script>
 
   <!-- Theme Javascript -->
   <script src="{{ asset('mediaboot/js/utility/utility.js') }}"></script>
-  <script src="{{ asset('mediaboot/js/main.js') }}"></script>
   <script src="{{ asset('mediaboot/js/demo/demo.js') }}"></script>
+  <script src="{{ asset('mediaboot/js/main.js') }}"></script>
+  {% block ready_js %}
   <!-- Dash ready -->
   <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -1378,11 +1378,11 @@
       });
     });
   </script>
+  {% endblock %}
   <!-- BEGIN: PAGE SCRIPTS -->
-  {% block javascript %}
+  {% block js %}
   {% endblock %}
 
   <!-- END: PAGE SCRIPTS -->
 </body>
-
 </html>
