@@ -8,6 +8,14 @@ class Index extends TemplateEvent
 {
     public function indexAction()
     {
-        return $this->render('Media/Resources/views/media/list.twig');
+        $mediaRepository = $this->getConnection('media')->getRepository('Media:Repository:Media');
+
+        $medias = $mediaRepository->findAll();
+
+        $this->dump($medias);
+
+        return $this->render('Media/Resources/views/media/list.twig', [
+            'medias' => $medias,
+        ]);
     }
 }

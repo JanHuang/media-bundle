@@ -1,6 +1,7 @@
 {% extends 'Media/Resources/views/layout/dash.twig' %}
 {% block plugins_css %}
 <link rel="stylesheet" type="text/css" href="{{ asset('mediaboot/vendor/plugins/magnific/magnific-popup.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('mediaboot/vendor/plugins/dropzone/css/dropzone.css') }}">
 {% endblock %}
 {% block body_class %}gallery-page{% endblock %}
 {% block content %}
@@ -83,14 +84,14 @@
             <div class="fail-message">
                 <span>No items were found matching the selected filters</span>
             </div>
-
+            {% for media in medias %}
             <div class="mix label1 folder1">
                 <div class="panel p6 pbn">
                     <div class="of-h">
-                        <img src="assets/img/stock/1.jpg" class="img-responsive" title="lost_typewritter.jpg">
+                        <img src="{{ asset(media.path) }}" class="img-responsive" title="{{ media.name }}">
                         <div class="row table-layout">
                             <div class="col-xs-8 va-m pln">
-                                <h6>lost_typewritter.jpg</h6>
+                                <h6>{{ media.name }}</h6>
                             </div>
                             <div class="col-xs-4 text-right va-m prn">
                                 <span class="fa fa-eye-slash fs12 text-muted"></span>
@@ -101,12 +102,7 @@
 
                 </div>
             </div>
-
-            <div class="gap"></div>
-            <div class="gap"></div>
-            <div class="gap"></div>
-            <div class="gap"></div>
-
+            {% endfor %}
         </div>
 
     </div>
@@ -117,48 +113,17 @@
 
         <!-- Image Upload Field -->
         <div class="fileupload fileupload-new admin-form mt20" data-provides="fileupload">
-            <div class="section mb10">
-                <label for="name2" class="field prepend-icon">
-                    <input type="text" name="name2" id="name2" class="event-name gui-input br-light light" placeholder="Title">
-                    <label for="name2" class="field-icon">
-                        <i class="fa fa-pencil"></i>
-                    </label>
-                </label>
-            </div>
-            <div class="section mb10">
-                <label class="field prepend-icon">
-                    <textarea class="gui-textarea br-light h-80 bg-light" id="comment" name="comment" placeholder="Description"></textarea>
-                    <label for="comment" class="field-icon">
-                        <i class="fa fa-comments"></i>
-                    </label>
-                <span class="input-footer hidden">
-                  <strong>Hint:</strong>Don't be negative or off topic! just be awesome...</span>
-                </label>
-            </div>
             <div class="row">
                 <div class="col-xs-4">
                 <span class="button btn-system btn-file btn-block ph5">
-                  <span class="fileupload-new">Select image</span>
-                  <span class="fileupload-exists">Change File</span>
-                  <input type="file">
+                  <span class="fileupload-new btn-modal" data-href="#modal-category">选择图片</span>
+                  <span class="fileupload-exists">修改文件</span>
+                  <input type="button">
                 </span>
                 </div>
-                <div class="col-xs-8 pln">
-                    <label for="name2" class="field prepend-icon">
-                        <input type="text" name="name2" id="name2" class="event-name gui-input br-light bg-light" placeholder="Tags">
-                        <label for="name2" class="field-icon">
-                            <i class="fa fa-pencil"></i>
-                        </label>
-                    </label>
-                </div>
             </div>
-
-            <div class="fileupload-preview thumbnail m5 mt20 mb30">
-                <img data-src="holder.js/100%x140" alt="holder">
-            </div>
-
         </div>
-
+        <br>
         <!-- Labels Menu -->
         <div class="list-group list-group-links">
             <div class="list-group-header"> Labels </div>
@@ -181,7 +146,35 @@
         </div>
 
     </aside>
+    <div id="modal-category" class="popup-basic popup-xl admin-form mfp-with-anim mfp-hide">
+        <div class="panel">
+            <div class="panel-heading">
+              <span class="panel-title">
+                <i class="fa fa-rocket"></i>Portlet Drag and Drop Uploader</span>
+            </div>
+            <!-- end .panel-heading section -->
 
+            <div class="panel-body p25">
+                <form action="{{ url('upload_api_v1') }}" class="dropzone dropzone-sm dz-clickable" id="dropZone">
+                    <div class="dz-default dz-message">
+                        <span>
+                            <i class="fa fa-cloud-upload"></i>
+                            <span class="main-text"><b>Drop Files</b> to upload</span> <br>
+                            <span class="sub-text">(or click)</span>
+                        </span>
+                    </div>
+                </form>
+                <!-- end section row section -->
+            </div>
+            <!-- end .form-body section -->
+
+            <div class="panel-footer">
+            </div>
+            <!-- end .form-footer section -->
+
+        </div>
+        <!-- end: .panel -->
+    </div>
 {% endblock %}
 {% block plugins_js %}
     <!-- Mixitup Plugin -->
@@ -190,6 +183,7 @@
     <!-- Page Plugins -->
     <script src="{{ asset('mediaboot/vendor/plugins/magnific/jquery.magnific-popup.js') }}"></script>
     <script src="{{ asset('mediaboot/vendor/plugins/fileupload/fileupload.js') }}"></script>
+    <script src="{{ asset('mediaboot/vendor/plugins/dropzone/dropzone.min.js') }}"></script>
     <script src="{{ asset('mediaboot/vendor/plugins/holder/holder.min.js') }}"></script>
 {% endblock %}
 {% block ready_js %}
@@ -410,6 +404,30 @@
                 }
             }
         };
+
+        // modal
+        $('.btn-modal').on('click', function() {
+            $(this).addClass('active-animation item-checked');
+            // Inline Admin-Form example
+            $.magnificPopup.open({
+                removalDelay: 500, //delay removal by X to allow out-animation,
+                items: {
+                    src: $(this).attr('data-href')
+                },
+                // overflowY: 'hidden', //
+                callbacks: {
+                    beforeOpen: function(e) {
+                        this.st.mainClass = 'mfp-slideDown';
+                    }
+                },
+                midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+            });
+
+        });
+
+        // uploader
+        var url = $('#dropZone').attr('action');
+        $("dropZone").dropzone({ url: url });
 
         // Init multiselect plugin on filter dropdowns
         $('#filter1').multiselect({
