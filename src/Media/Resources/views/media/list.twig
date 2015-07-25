@@ -48,15 +48,7 @@
 
                 </div>
                 <div class="col-xs-5 text-right">
-                    <button type="button" id="mix-reset" class="btn btn-default mr5">Clear Filters</button>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default to-grid">
-                            <span class="fa fa-th"></span>
-                        </button>
-                        <button type="button" class="btn btn-default to-list">
-                            <span class="fa fa-navicon"></span>
-                        </button>
-                    </div>
+                    <button type="button" id="mix-reset" class="btn btn-system mr5"><i class="fa fa-refresh"></i> 刷新</button>
                 </div>
             </div>
             <div class="mix-controls hidden">
@@ -93,9 +85,10 @@
                             <div class="col-xs-8 va-m pln">
                                 <h6>{{ media.name }}</h6>
                             </div>
-                            <div class="col-xs-4 text-right va-m prn">
-                                <span class="fa fa-eye-slash fs12 text-muted"></span>
+                            <div class="col-xs-6 text-right va-m prn">
                                 <span class="fa fa-circle fs10 text-info ml10"></span>
+                                <span class="fa fa-eye-slash fs12 text-muted"></span>
+                                <span class="fa fa-remove fs12 text-muted"></span>
                             </div>
                         </div>
                     </div>
@@ -109,15 +102,15 @@
 
     <aside class="tray tray-right tray320" data-tray-height="match">
 
-        <h4 class="tray-title"> Upload New Image </h4>
+        <h4 class="tray-title"> 上传 </h4>
 
         <!-- Image Upload Field -->
         <div class="fileupload fileupload-new admin-form mt20" data-provides="fileupload">
             <div class="row">
                 <div class="col-xs-4">
-                <span class="button btn-system btn-file btn-block ph5">
-                  <span class="fileupload-new btn-modal" data-href="#modal-category">选择图片</span>
-                  <span class="fileupload-exists">修改文件</span>
+                <span class="button btn-system btn-file btn-block ph5 btn-modal" data-href="#modal-category">
+                  <span class="fileupload-new " >选择</span>
+                  <span class="fileupload-exists">修改</span>
                   <input type="button">
                 </span>
                 </div>
@@ -418,11 +411,13 @@
                 callbacks: {
                     beforeOpen: function(e) {
                         this.st.mainClass = 'mfp-slideDown';
+                    },
+                    afterClose: function(){
+                        window.location.reload();
                     }
                 },
                 midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
             });
-
         });
 
         // uploader

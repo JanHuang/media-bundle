@@ -43,7 +43,7 @@ class Uploader extends RestEvent
         $id = 0;
 
         foreach ($files as $file) {
-            $relativePath = str_replace(dirname($this->get('kernel')->getRootPath()) . DIRECTORY_SEPARATOR, '', $file->getRealPath());
+            $relativePath = str_replace(dirname($this->get('kernel')->getRootPath()) . DIRECTORY_SEPARATOR . 'public/', '', $file->getRealPath());
             if (false == ($row = $write->find('fastd_media', ['hash' => $file->getHash()]))) {
                 $id = $write->insert('fastd_media', [
                     'name' => $file->getOriginalName(),

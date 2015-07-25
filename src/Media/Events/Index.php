@@ -12,8 +12,6 @@ class Index extends TemplateEvent
 
         $medias = $mediaRepository->findAll();
 
-        $this->dump($medias);
-
         return $this->render('Media/Resources/views/media/list.twig', [
             'medias' => $medias,
         ]);
