@@ -1,0 +1,29 @@
+{
+    "name": "fastd/media-module",
+    "description": "Fastd media module.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "janhuang",
+            "email": "bboyjanhuang@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "fastd/fastd-module": "0.1.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": "Module\\Module::init",
+        "post-install-cmd": "Module\\Module::init",
+        "post-create-project-cmd": "Module\\Module::init"
+    }
+}
