@@ -4,9 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c87fe0519f2472a5b8507bcc565d85cc",
+    "hash": "dcf750a0a36c3a84fe0fbe331d484b4a",
     "packages": [],
     "packages-dev": [
+        {
+            "name": "fastd/asset-module",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://git.coding.net/janhuang/asset-module.git",
+                "reference": "399ccdb5643878ade55fccbd8bdf409e6587401a"
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "fastd/fastd-module": "0.1.x-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src"
+                }
+            },
+            "scripts": {
+                "post-update-cmd": [
+                    "Module\\Module::init"
+                ],
+                "post-install-cmd": [
+                    "Module\\Module::init"
+                ],
+                "post-create-project-cmd": [
+                    "Module\\Module::init"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "janhuang",
+                    "email": "bboyjanhuang@gmail.com"
+                }
+            ],
+            "description": "Fastd media module.",
+            "time": "2015-07-26 04:12:03"
+        },
         {
             "name": "fastd/config",
             "version": "v0.1.0",
@@ -228,12 +271,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JanHuang/fast-module.git",
-                "reference": "b463e6876ea9d40289c8e674e62b1df6440782d0"
+                "reference": "b78823483b5dc3313ac8f6ec773821f72a0fa815"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JanHuang/fast-module/zipball/b463e6876ea9d40289c8e674e62b1df6440782d0",
-                "reference": "b463e6876ea9d40289c8e674e62b1df6440782d0",
+                "url": "https://api.github.com/repos/JanHuang/fast-module/zipball/b78823483b5dc3313ac8f6ec773821f72a0fa815",
+                "reference": "b78823483b5dc3313ac8f6ec773821f72a0fa815",
                 "shasum": ""
             },
             "require": {
@@ -266,7 +309,7 @@
             "keywords": [
                 "module develop framework."
             ],
-            "time": "2015-07-22 04:20:18"
+            "time": "2015-07-26 04:06:01"
         },
         {
             "name": "fastd/finder",
@@ -871,7 +914,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "fastd/fastd-module": 20
+        "fastd/fastd-module": 20,
+        "fastd/asset-module": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

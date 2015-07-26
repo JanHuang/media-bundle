@@ -10,8 +10,15 @@
         }
     ],
     "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://git.coding.net/janhuang/asset-module.git"
+        }
+    ],
     "require": {
-        "php": ">=5.4"
+        "php": ">=5.4",
+        "fastd/asset-module": "dev-master"
     },
     "require-dev": {
         "fastd/fastd-module": "0.1.x-dev"
