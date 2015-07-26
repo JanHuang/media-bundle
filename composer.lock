@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "16051334a9cd0d4dd16cd57576bb9be5",
+    "hash": "a14dbb096412f6c817b941802e405a0b",
     "packages": [
         {
             "name": "fastd/asset-bundle",
@@ -273,16 +273,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JanHuang/fast-module.git",
-                "reference": "b78823483b5dc3313ac8f6ec773821f72a0fa815"
+                "reference": "348f00bfab70ce2b36b54b3e21892f30ada520b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JanHuang/fast-module/zipball/b78823483b5dc3313ac8f6ec773821f72a0fa815",
-                "reference": "b78823483b5dc3313ac8f6ec773821f72a0fa815",
+                "url": "https://api.github.com/repos/JanHuang/fast-module/zipball/348f00bfab70ce2b36b54b3e21892f30ada520b3",
+                "reference": "348f00bfab70ce2b36b54b3e21892f30ada520b3",
                 "shasum": ""
             },
             "require": {
-                "fastd/framework": "~0.1.0",
+                "fastd/framework": "~1.0.0",
                 "php": ">=5.4.0"
             },
             "type": "library",
@@ -311,7 +311,7 @@
             "keywords": [
                 "module develop framework."
             ],
-            "time": "2015-07-26 04:06:01"
+            "time": "2015-07-26 05:16:30"
         },
         {
             "name": "fastd/finder",
@@ -355,16 +355,16 @@
         },
         {
             "name": "fastd/framework",
-            "version": "v0.1.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JanHuang/framework.git",
-                "reference": "f9ab81770ca19d7a2c5c427985e5c8620ea02ed9"
+                "reference": "5900100575f652dd7f5ee7115daadd272db573a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JanHuang/framework/zipball/f9ab81770ca19d7a2c5c427985e5c8620ea02ed9",
-                "reference": "f9ab81770ca19d7a2c5c427985e5c8620ea02ed9",
+                "url": "https://api.github.com/repos/JanHuang/framework/zipball/5900100575f652dd7f5ee7115daadd272db573a1",
+                "reference": "5900100575f652dd7f5ee7115daadd272db573a1",
                 "shasum": ""
             },
             "require": {
@@ -387,7 +387,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -412,7 +412,7 @@
                 "FastD Module",
                 "FastD framework"
             ],
-            "time": "2015-07-23 04:29:32"
+            "time": "2015-07-26 05:08:07"
         },
         {
             "name": "fastd/http",
@@ -916,8 +916,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "fastd/asset-bundle": 20,
-        "fastd/fastd-module": 20
+        "fastd/asset-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

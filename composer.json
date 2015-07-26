@@ -15,7 +15,7 @@
         "fastd/asset-bundle": "0.1.x-dev"
     },
     "require-dev": {
-        "fastd/fastd-module": "0.1.x-dev"
+        "fastd/fastd-module": "~0.1.0"
     },
     "extra": {
         "branch-alias": {
