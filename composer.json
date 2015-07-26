@@ -1,5 +1,5 @@
 {
-    "name": "fastd/media-module",
+    "name": "fastd/media-bundle",
     "description": "Fastd media module.",
     "type": "library",
     "license": "MIT",
@@ -10,18 +10,17 @@
         }
     ],
     "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://git.coding.net/janhuang/asset-module.git"
-        }
-    ],
     "require": {
         "php": ">=5.4",
-        "fastd/asset-module": "dev-master"
+        "fastd/asset-bundle": "0.1.x-dev"
     },
     "require-dev": {
         "fastd/fastd-module": "0.1.x-dev"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
     },
     "autoload": {
         "psr-4": {

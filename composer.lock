@@ -4,16 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dcf750a0a36c3a84fe0fbe331d484b4a",
-    "packages": [],
-    "packages-dev": [
+    "hash": "16051334a9cd0d4dd16cd57576bb9be5",
+    "packages": [
         {
-            "name": "fastd/asset-module",
+            "name": "fastd/asset-bundle",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://git.coding.net/janhuang/asset-module.git",
-                "reference": "399ccdb5643878ade55fccbd8bdf409e6587401a"
+                "url": "https://github.com/JanHuang/asset-bundle.git",
+                "reference": "d1530a821eda86d3d1e6f86fcebb589887c61361"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JanHuang/asset-bundle/zipball/d1530a821eda86d3d1e6f86fcebb589887c61361",
+                "reference": "d1530a821eda86d3d1e6f86fcebb589887c61361",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.4"
@@ -22,22 +27,17 @@
                 "fastd/fastd-module": "0.1.x-dev"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "": "src"
                 }
             },
-            "scripts": {
-                "post-update-cmd": [
-                    "Module\\Module::init"
-                ],
-                "post-install-cmd": [
-                    "Module\\Module::init"
-                ],
-                "post-create-project-cmd": [
-                    "Module\\Module::init"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -48,8 +48,10 @@
                 }
             ],
             "description": "Fastd media module.",
-            "time": "2015-07-26 04:12:03"
-        },
+            "time": "2015-07-26 04:47:23"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "fastd/config",
             "version": "v0.1.0",
@@ -914,8 +916,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "fastd/fastd-module": 20,
-        "fastd/asset-module": 20
+        "fastd/asset-bundle": 20,
+        "fastd/fastd-module": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

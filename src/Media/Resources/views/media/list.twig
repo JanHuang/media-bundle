@@ -1,7 +1,7 @@
 {% extends 'Media/Resources/views/layout/dash.twig' %}
 {% block plugins_css %}
-<link rel="stylesheet" type="text/css" href="{{ asset('assetboot/vendor/plugins/magnific/magnific-popup.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assetboot/vendor/plugins/dropzone/css/dropzone.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assetbundle/vendor/plugins/magnific/magnific-popup.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assetbundle/vendor/plugins/dropzone/css/dropzone.css') }}">
 {% endblock %}
 {% block body_class %}gallery-page{% endblock %}
 {% block content %}
@@ -171,13 +171,13 @@
 {% endblock %}
 {% block plugins_js %}
     <!-- Mixitup Plugin -->
-    <script src="{{ asset('assetboot/vendor/plugins/mixitup/jquery.mixitup.min.js') }}"></script>
+    <script src="{{ asset('assetbundle/vendor/plugins/mixitup/jquery.mixitup.min.js') }}"></script>
 
     <!-- Page Plugins -->
-    <script src="{{ asset('assetboot/vendor/plugins/magnific/jquery.magnific-popup.js') }}"></script>
-    <script src="{{ asset('assetboot/vendor/plugins/fileupload/fileupload.js') }}"></script>
-    <script src="{{ asset('assetboot/vendor/plugins/dropzone/dropzone.min.js') }}"></script>
-    <script src="{{ asset('assetboot/vendor/plugins/holder/holder.min.js') }}"></script>
+    <script src="{{ asset('assetbundle/vendor/plugins/magnific/jquery.magnific-popup.js') }}"></script>
+    <script src="{{ asset('assetbundle/vendor/plugins/fileupload/fileupload.js') }}"></script>
+    <script src="{{ asset('assetbundle/vendor/plugins/dropzone/dropzone.min.js') }}"></script>
+    <script src="{{ asset('assetbundle/vendor/plugins/holder/holder.min.js') }}"></script>
 {% endblock %}
 {% block ready_js %}
 <script type="text/javascript">
