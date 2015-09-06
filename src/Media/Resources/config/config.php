@@ -6,4 +6,10 @@
         ],
         'size' => '10M'
     ],
+    /**
+     * Configuration
+     */
+    'media' => [
+
+    ],
 ];
