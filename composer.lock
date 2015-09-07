@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a14dbb096412f6c817b941802e405a0b",
+    "hash": "f6f3717b5896d046f6939efaa646f670",
     "packages": [
+        {
+            "name": "imagine/imagine",
+            "version": "0.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
+                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2014-11-11 11:36:02"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "fastd/asset-bundle",
             "version": "dev-master",
@@ -49,21 +108,19 @@
             ],
             "description": "Fastd media module.",
             "time": "2015-07-26 04:47:23"
-        }
-    ],
-    "packages-dev": [
+        },
         {
             "name": "fastd/config",
-            "version": "v0.2.0",
+            "version": "v0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JanHuang/config.git",
-                "reference": "bd8dbc7b70189c14a2de8d6b95bfdcc6df29be7c"
+                "reference": "b2dd7b121d1f1aeab7091b49fca5cbea28a69b57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JanHuang/config/zipball/bd8dbc7b70189c14a2de8d6b95bfdcc6df29be7c",
-                "reference": "bd8dbc7b70189c14a2de8d6b95bfdcc6df29be7c",
+                "url": "https://api.github.com/repos/JanHuang/config/zipball/b2dd7b121d1f1aeab7091b49fca5cbea28a69b57",
+                "reference": "b2dd7b121d1f1aeab7091b49fca5cbea28a69b57",
                 "shasum": ""
             },
             "require": {
@@ -95,7 +152,7 @@
                 "FastD",
                 "config"
             ],
-            "time": "2015-08-02 02:16:30"
+            "time": "2015-09-07 09:47:13"
         },
         {
             "name": "fastd/console",
@@ -880,12 +937,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "b1a4c14b6076cd180b7133a1ded15efd18b2390e"
+                "reference": "825bdc1afcccdc88c2d641343f8df4fc5afe214d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b1a4c14b6076cd180b7133a1ded15efd18b2390e",
-                "reference": "b1a4c14b6076cd180b7133a1ded15efd18b2390e",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/825bdc1afcccdc88c2d641343f8df4fc5afe214d",
+                "reference": "825bdc1afcccdc88c2d641343f8df4fc5afe214d",
                 "shasum": ""
             },
             "require": {
@@ -933,7 +990,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-01 09:38:14"
+            "time": "2015-09-06 06:45:56"
         }
     ],
     "aliases": [],

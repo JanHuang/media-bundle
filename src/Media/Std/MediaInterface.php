@@ -16,5 +16,29 @@ namespace Media\Std;
 
 interface MediaInterface
 {
+    public function getName();
 
+    public function getPath();
+
+    public function getThumbnil();
+
+    public function getSize();
+
+    public function getExtension();
+
+    public function getImage($id);
+
+    public function getFieldOriginalName();
+
+    public function getFieldSaveName();
+
+    public function getFieldSavePath();
+
+    public function getFieldThumbnilPath();
+
+    public function getFieldHash();
+
+    public function getFieldSize();
+
+    public function getFieldExt();
 }

@@ -10,8 +10,12 @@
      * Configuration
      */
     'media' => [
-        'remote' => '',
-        'repository' => '',
-        'resrouces_url' => '',
+        'connection' => 'media',
+        'repository' => 'Media:Repository:Media',
+        'resrouces_url' => null,
+        'thumbnil' => [
+            'width' => 120,
+            'height' => 120,
+        ]
     ],
 ];

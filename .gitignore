@@ -4,3 +4,4 @@
 /vendor
 /web
 /public
+composer.lock

@@ -15,8 +15,76 @@
 namespace Media\Repository;
 
 use FastD\Database\Repository\Repository;
+use Media\Std\MediaInterface;
 
-class MediaRepository extends Repository
+class MediaRepository extends Repository implements MediaInterface
 {
+    protected $media;
 
+    public function getName()
+    {
+        // TODO: Implement getName() method.
+    }
+
+    public function getPath()
+    {
+        // TODO: Implement getPath() method.
+    }
+
+    public function getThumbnil()
+    {
+        // TODO: Implement getThumbnil() method.
+    }
+
+    public function getSize()
+    {
+        // TODO: Implement getSize() method.
+    }
+
+    public function getExtension()
+    {
+        // TODO: Implement getExtension() method.
+    }
+
+    public function getImage($id)
+    {
+        $this->media = $this->find(['id' => $id]);
+
+        return $this->media;
+    }
+
+    public function getFieldOriginalName()
+    {
+        return 'name';
+    }
+
+    public function getFieldSaveName()
+    {
+        return 'save_name';
+    }
+
+    public function getFieldSavePath()
+    {
+        return 'path';
+    }
+
+    public function getFieldThumbnilPath()
+    {
+        return 'thumb';
+    }
+
+    public function getFieldHash()
+    {
+        return 'hash';
+    }
+
+    public function getFieldSize()
+    {
+        return 'size';
+    }
+
+    public function getFieldExt()
+    {
+        return 'ext';
+    }
 }

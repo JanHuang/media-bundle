@@ -2,13 +2,16 @@
 
 namespace Media\Events;
 
+use FastD\Config\Config;
 use FastD\Framework\Events\TemplateEvent;
 
 class Index extends TemplateEvent
 {
-    public function indexAction()
+    public function indexAction(Config $config)
     {
-        $mediaRepository = $this->getConnection('media')->getRepository('Media:Repository:Media');
+        $connection = $config->get('media.connection');
+        $repository = $config->get('media.repository');
+        $mediaRepository = $this->getConnection($connection)->getRepository($repository);
 
         $medias = $mediaRepository->findAll();
 
