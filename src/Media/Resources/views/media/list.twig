@@ -1,4 +1,4 @@
-{% extends 'Media/Resources/views/layout/dash.twig' %}
+{% extends file_exists('layout/dash.twig') ? 'layout/dash.twig' : 'Media/Resources/views/layout/dash.twig' %}
 {% block plugins_css %}
 <link rel="stylesheet" type="text/css" href="{{ asset('assetbundle/vendor/plugins/magnific/magnific-popup.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assetbundle/vendor/plugins/dropzone/css/dropzone.css') }}">
