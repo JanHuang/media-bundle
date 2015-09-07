@@ -10,6 +10,8 @@
      * Configuration
      */
     'media' => [
-
+        'remote' => '',
+        'repository' => '',
+        'resrouces_url' => '',
     ],
 ];

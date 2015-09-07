@@ -28,9 +28,9 @@ class Uploader extends RestEvent
 
         $uploadedFiles = $request->getUploader(
             [
-                'save.path' => $this->getParameters('uploaded.path'),
-                'allow.ext' => $this->getParameters('uploaded.exts'),
-                'max.size' => $this->getParameters('uploaded.size')
+                'path' => $this->getParameters('uploaded.path'),
+                'exts' => $this->getParameters('uploaded.exts'),
+                'size' => $this->getParameters('uploaded.size')
             ]
         )->uploading();
 
