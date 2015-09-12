@@ -12,7 +12,6 @@ class Index extends TemplateEvent
         $connection = $config->get('media.connection');
         $repository = $config->get('media.repository');
         $mediaRepository = $this->getConnection($connection)->getRepository($repository);
-
         $medias = $mediaRepository->findAll();
 
         return $this->render('Media/Resources/views/media/list.twig', [

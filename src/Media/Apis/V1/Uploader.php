@@ -14,8 +14,8 @@
 
 namespace Media\Apis\V1;
 
-use FastD\Debug\Exceptions\FatalError;
 use FastD\Framework\Events\RestEvent;
+use FastD\Http\File\File;
 use FastD\Http\Request;
 use FastD\Http\Response;
 use Imagine\Image\Box;
@@ -25,60 +25,16 @@ use Media\Std\MediaInterface;
 
 class Uploader extends RestEvent
 {
-    public function uploadAction(Request $request)
+    protected function uploadRemote(Request $request, File $file, $url = null)
     {
-        if ($request->files->isEmpty()) {
-            return $this->responseJson(['msg' => 'Empty files.'], Response::HTTP_BAD_REQUEST);
+        if (null === $url) {
+            return false;
         }
 
-        $uploadedFiles = $request->getUploader(
-            [
-                'save.path' => $this->getParameters('uploaded.path'),
-                'allow.ext' => $this->getParameters('uploaded.exts'),
-                'max.size' => $this->getParameters('uploaded.size')
-            ]
-        )->uploading();
-
-        if (null == ($files = $uploadedFiles->getUploadFiles())) {
-            return $this->responseJson(['msg' => 'Uploaded files error.']);
-        }
-
-        $mediaRepository = $this->getConnection($this->getParameters('media.connection'))->getRepository($this->getParameters('media.repository'));
-
-        if (!($mediaRepository instanceof MediaInterface)) {
-            throw new FatalError('Media repository must be extends Media\Std\MediaInterface');
-        }
-
-        $id = 0;
-
-        foreach ($files as $file) {
-            $relativePath = str_replace(dirname($this->get('kernel')->getRootPath()) . DIRECTORY_SEPARATOR . 'public/', '', $file->getRealPath());
-            $thumb = $this->toThumbnail(
-                $relativePath,
-                $this->getParameters('media.thumbnil.width'),
-                $this->getParameters('media.thumbnil.height')
-            );
-
-            if (false == ($row = $mediaRepository->find(['hash' => $file->getHash()]))) {
-                $id = $mediaRepository->insert([
-                    $mediaRepository->getFieldOriginalName()=> $file->getOriginalName(),
-                    $mediaRepository->getFieldSaveName()    => $file->getFilename(),
-                    $mediaRepository->getFieldSavePath()    => $relativePath,
-                    $mediaRepository->getFieldThumbnilPath()=> $thumb,
-                    $mediaRepository->getFieldHash()        => $file->getHash(),
-                    $mediaRepository->getFieldSize()        => $file->getSize(),
-                    $mediaRepository->getFieldExt()         => $file->getExtension(),
-                ]);
-            } else {
-                $id = $row['id'];
-            }
-        }
-
-        return $this->responseJson([
-            'id' => $id,
-            'url' => $this->asset($relativePath, $this->getParameters('media.resrouces_url')),
-            'thumb' => $this->asset($thumb, $this->getParameters('media.resrouces_url')),
-        ]);
+        $data = array('img'=> new \CURLFile($file->getPath() . '/' . $file->getFilename()));
+        $launcher = $request->createRequest($url, $data, 5);
+        $response = $launcher->post();
+        $response->getContent();
     }
 
     /**
@@ -97,4 +53,78 @@ class Uploader extends RestEvent
         ;
         return $thumbnail;
     }
+
+    protected function createNewImageRecord(MediaInterface $interface = null, File $file, $thumb = '')
+    {
+        if (null === $interface) {
+            return false;
+        }
+
+        if (false == ($row = $interface->find(['hash' => $file->getHash()]))) {
+            return $interface->insert([
+                $interface->getFieldOriginalName()=> $file->getOriginalName(),
+                $interface->getFieldSaveName()    => $file->getFilename(),
+                $interface->getFieldSavePath()    => $interface,
+                $interface->getFieldThumbnilPath()=> $thumb,
+                $interface->getFieldHash()        => $file->getHash(),
+                $interface->getFieldSize()        => $file->getSize(),
+                $interface->getFieldExt()         => $file->getExtension(),
+            ]);
+        }
+        return $row['id'];
+    }
+
+    public function uploadAction(Request $request)
+    {
+        if ($request->files->isEmpty()) {
+            return $this->responseJson(['msg' => 'Empty files.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $uploadedFiles = $request->getUploader(
+            [
+                'path' => $this->getParameters('uploaded.path'),
+                'exts' => $this->getParameters('uploaded.exts'),
+                'size'  => $this->getParameters('uploaded.size')
+            ]
+        )->uploading();
+
+        if (null == ($files = $uploadedFiles->getUploadFiles())) {
+            return $this->responseJson(['msg' => 'Uploaded files error.']);
+        }
+
+        try {
+            $remote = $this->getParameters('media.remote');
+        } catch (\Exception $e) {
+            $remote = null;
+        }
+
+        try {
+            $repository = $this->getParameters('media.repository');
+            $connection = $this->getParameters('media.connection');
+            $mediaRepository = $this->getConnection($connection)->getRepository($repository);
+        } catch (\Exception $e) {
+            $mediaRepository = null;
+        }
+
+        foreach ($files as $file) {
+            $relativePath = str_replace(dirname($this->get('kernel')->getRootPath()) . DIRECTORY_SEPARATOR . 'public/', '', $file->getRealPath());
+            $thumb = $this->toThumbnail(
+                $relativePath,
+                $this->getParameters('media.thumbnil.width'),
+                $this->getParameters('media.thumbnil.height')
+            );
+
+            $id = $this->createNewImageRecord($mediaRepository, $file);
+            $remoteUrl = $this->uploadRemote($request, $file, $remote);
+        }
+
+        return $this->responseJson([
+            'id'            => $id,
+            'url'           => $this->asset($relativePath, $this->getParameters('media.resrouces_url')),
+            'thumb'         => $this->asset($thumb, $this->getParameters('media.resrouces_url')),
+            'remote_url'    => $remoteUrl
+        ]);
+    }
+
+
 }

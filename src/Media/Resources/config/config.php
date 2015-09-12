@@ -8,10 +8,13 @@
     ],
     /**
      * Configuration
+
+
      */
     'media' => [
         'connection' => 'media',
         'repository' => 'Media:Repository:Media',
+        'remote' => 'http://localhost/demo/file_demo/upload.php',
         'resrouces_url' => null,
         'thumbnil' => [
             'width' => 120,

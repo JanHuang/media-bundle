@@ -15,7 +15,9 @@
         "imagine/imagine": "~0.6.0"
     },
     "require-dev": {
-        "fastd/fastd-module": "~0.1.0",
+        "fastd/fastd-module": "1.0.*@BETA",
+        "fastd/framework": "1.4.*@BETA",
+        "fastd/http": "1.0.*@BETA",
         "fastd/asset-bundle": "0.1.x-dev"
     },
     "extra": {
