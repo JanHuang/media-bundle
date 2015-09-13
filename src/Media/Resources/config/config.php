@@ -14,11 +14,14 @@
     'media' => [
         'connection' => 'media',
         'repository' => 'Media:Repository:Media',
-        'remote' => 'http://localhost/demo/file_demo/upload.php',
         'resrouces_url' => null,
+        'remote' => [
+            'prefix'    => '',
+            'url'       => '',
+        ],
         'thumbnil' => [
-            'width' => 120,
-            'height' => 120,
+            'width'     => 120,
+            'height'    => 120,
         ]
     ],
 ];

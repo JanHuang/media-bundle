@@ -23,18 +23,39 @@ use Imagine\Image\ImageInterface;
 use Imagine\Gd\Imagine;
 use Media\Std\MediaInterface;
 
+/**
+ * Class Uploader
+ *
+ * @package Media\Apis\V1
+ */
 class Uploader extends RestEvent
 {
+    /**
+     * @param Request $request
+     * @param File    $file
+     * @param null    $url
+     * @return bool
+     */
     protected function uploadRemote(Request $request, File $file, $url = null)
     {
         if (null === $url) {
             return false;
         }
 
-        $data = array('img'=> new \CURLFile($file->getPath() . '/' . $file->getFilename()));
+        try {
+            $prefix = $this->getParameters('media.remote.prefix');
+        } catch (\Exception $e) {
+            $prefix = '';
+        }
+
+        $data = array(
+            'img'=> new \CURLFile($file->getPath() . '/' . $file->getFilename()),
+            'prefix' => $prefix
+        );
         $launcher = $request->createRequest($url, $data, 5);
         $response = $launcher->post();
-        $response->getContent();
+        echo($response->getContent());die;
+        return json_decode($response->getContent())['url'];
     }
 
     /**
@@ -54,6 +75,12 @@ class Uploader extends RestEvent
         return $thumbnail;
     }
 
+    /**
+     * @param MediaInterface|null $interface
+     * @param File                $file
+     * @param string              $thumb
+     * @return bool
+     */
     protected function createNewImageRecord(MediaInterface $interface = null, File $file, $thumb = '')
     {
         if (null === $interface) {
@@ -74,6 +101,11 @@ class Uploader extends RestEvent
         return $row['id'];
     }
 
+    /**
+     * @param Request $request
+     * @return \FastD\Http\JsonResponse
+     * @throws \Exception
+     */
     public function uploadAction(Request $request)
     {
         if ($request->files->isEmpty()) {
@@ -84,7 +116,7 @@ class Uploader extends RestEvent
             [
                 'path' => $this->getParameters('uploaded.path'),
                 'exts' => $this->getParameters('uploaded.exts'),
-                'size'  => $this->getParameters('uploaded.size')
+                'size' => $this->getParameters('uploaded.size')
             ]
         )->uploading();
 
@@ -93,7 +125,7 @@ class Uploader extends RestEvent
         }
 
         try {
-            $remote = $this->getParameters('media.remote');
+            $remote = $this->getParameters('media.remote.url');
         } catch (\Exception $e) {
             $remote = null;
         }
@@ -125,6 +157,4 @@ class Uploader extends RestEvent
             'remote_url'    => $remoteUrl
         ]);
     }
-
-
 }
