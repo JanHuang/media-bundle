@@ -1088,12 +1088,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "0433e79cd51d446d30d1f3c01f08c4bfe3a1b70e"
+                "reference": "1292dcc69ac453b493d5817bb6d344c91d27f80c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/0433e79cd51d446d30d1f3c01f08c4bfe3a1b70e",
-                "reference": "0433e79cd51d446d30d1f3c01f08c4bfe3a1b70e",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1292dcc69ac453b493d5817bb6d344c91d27f80c",
+                "reference": "1292dcc69ac453b493d5817bb6d344c91d27f80c",
                 "shasum": ""
             },
             "require": {
@@ -1141,7 +1141,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-12 12:59:28"
+            "time": "2015-09-14 08:36:12"
         }
     ],
     "aliases": [],
