@@ -18,4 +18,9 @@ class Index extends TemplateEvent
             'medias' => $medias,
         ]);
     }
+
+    public function editorAction()
+    {
+        return $this->render('Media/Resources/views/editors/simple.twig');
+    }
 }

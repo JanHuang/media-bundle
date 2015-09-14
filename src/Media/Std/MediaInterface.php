@@ -41,4 +41,8 @@ interface MediaInterface
     public function getFieldSize();
 
     public function getFieldExt();
+
+    public function getTags();
+
+    public function getCategories();
 }

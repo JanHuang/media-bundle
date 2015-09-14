@@ -6,6 +6,8 @@ Routes::group('/dash/media', function () {
      *
      */
     Routes::get(['/list', 'name' => 'media_bundle_list'], 'Media\\Events\\Index@indexAction');
+
+    Routes::get(['/editor', 'name' => 'media_bundle_editor'], 'Media\\Events\\Index@editorAction');
 });
 
 Routes::group('/api/v1', function () {

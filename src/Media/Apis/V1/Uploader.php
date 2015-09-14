@@ -54,7 +54,7 @@ class Uploader extends RestEvent
         );
         $launcher = $request->createRequest($url, $data, 5);
         $response = $launcher->post();
-        echo($response->getContent());die;
+
         return json_decode($response->getContent())['url'];
     }
 

@@ -87,4 +87,14 @@ class MediaRepository extends Repository implements MediaInterface
     {
         return 'ext';
     }
+
+    public function getTags()
+    {
+        // TODO: Implement getTags() method.
+    }
+
+    public function getCategories()
+    {
+        // TODO: Implement getCategories() method.
+    }
 }

@@ -8,20 +8,19 @@
     ],
     /**
      * Configuration
-
-
-     */
-    'media' => [
-        'connection' => 'media',
-        'repository' => 'Media:Repository:Media',
-        'resrouces_url' => null,
-        'remote' => [
-            'prefix'    => '',
-            'url'       => '',
+        'media' => [
+            'connection' => 'media',
+            'repository' => 'Media:Repository:Media',
+            'resrouces_url' => null,
+            'remote' => [
+                'prefix'    => '',
+                'url'       => '',
+            ],
+            'thumbnil' => [
+                'width'     => 120,
+                'height'    => 120,
+            ]
         ],
-        'thumbnil' => [
-            'width'     => 120,
-            'height'    => 120,
-        ]
-    ],
+     */
+
 ];

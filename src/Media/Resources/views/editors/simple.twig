@@ -1,0 +1,49 @@
+{% extends file_exists('layout/dash.twig') ? 'layout/dash.twig' : 'Media/Resources/views/layout/dash.twig' %}
+{% block plugins_css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assetbundle/vendor/plugins/summernote/summernote.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assetbundle/vendor/plugins/dropzone/css/dropzone.css') }}">
+{% endblock %}
+{% block plugins_js %}
+    <script src="{{ asset('assetbundle/vendor/plugins/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('assetbundle/vendor/plugins/dropzone/dropzone.min.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <section class="summernote"></section>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            /*$.summernote.renderer.addDialogInfo('image', function (lang, options) {
+             var content = document.getElementById('upload-picture').innerHTML;
+             document.getElementById('upload-picture').innerHTML = '';
+             return '<div class="note-image-dialog modal" aria-hidden="true" style="display: none;">' +
+             '<div class="modal-dialog">' +
+             '<div class="modal-content">' +
+             '<div class="modal-header">' +
+             '<button type="button" class="close" aria-hidden="true" tabindex="-1">×</button>' +
+             '<h4 class="modal-title">Insert Image</h4>' +
+             '</div>' +
+             '<div class="modal-body">' +
+             (content) +
+             '</div>' +
+             '<div class="modal-footer">' +
+             '<button href="#" class="btn btn-primary note-image-btn disabled" disabled="">Insert Image</button>' +
+             '</div>' +
+             '</div>' +
+             '</div>' +
+             '</div>';
+             });*/
+
+            $('.summernote').summernote({
+                height: 255, //set editable area's height
+                focus: false, //set focus editable area after Initialize summernote
+                oninit: function() {},
+                onChange: function(contents, $editable) {},
+                onImageUpload: function (files, editor, welEditable) {
+                    editor.insertImage(welEditable, 'http://img.hb.aicdn.com/1e8e03d5229baeff826561efb46806bf2e67364a28d7b-rOj60T_fw658');
+                }
+            });
+        });
+    </script>
+{% endblock %}
