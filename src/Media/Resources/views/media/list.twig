@@ -1,522 +1,73 @@
 {% extends file_exists('layout/dash.twig') ? 'layout/dash.twig' : 'Media/Resources/views/layout/dash.twig' %}
 {% block plugins_css %}
-<link rel="stylesheet" type="text/css" href="{{ asset('assetbundle/vendor/plugins/magnific/magnific-popup.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assetbundle/vendor/plugins/dropzone/css/dropzone.css') }}">
+{% endblock %}
+{% block plugins_js %}
+<script src="{{ asset('assetbundle/vendor/plugins/dropzone/dropzone.min.js') }}"></script>
 {% endblock %}
 {% block body_class %}gallery-page{% endblock %}
 {% block content %}
-    <div class="tray tray-center">
+<section id="content">
+    <div class="row">
+        <div class="col-md-3 message-tray animated fadeIn">
 
-        <div class="mh15 pv15 br-b br-light">
-            <div class="row">
-                <div class="col-xs-7">
-                    <div class="mix-controls ib">
-                        <form class="controls" id="select-filters">
-                            <!-- We can add an unlimited number of "filter groups" using the following format: -->
-                            <div class="btn-group ib mr10">
-                                <button type="button" class="btn btn-default hidden-xs">
-                                    <span class="fa fa-folder"></span>
-                                </button>
-                                <div class="btn-group">
-                                    <fieldset>
-                                        <select id="filter1">
-                                            <option value="">All Folders</option>
-                                            <option value=".folder1">Publicity</option>
-                                            <option value=".folder2">Spain Vacation</option>
-                                            <option value=".folder3">Sony Demo</option>
-                                        </select>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="btn-group ib mr10">
-                                <button type="button" class="btn btn-default hidden-xs">
-                                    <span class="fa fa-tag"></span>
-                                </button>
-                                <div class="btn-group">
-                                    <fieldset>
-                                        <select id="filter2">
-                                            <option value="">All Labels</option>
-                                            <option value=".label1">Work</option>
-                                            <option value=".label3">Clients</option>
-                                            <option value=".label2">Family</option>
-                                        </select>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </form>
+            <a href="#upload-picture" data-toggle="tab" id="quick-compose" class="tab btn btn-danger btn-block mb15">上传图片</a>
+
+            <div class="panel">
+                <div class="panel-body p10">
+                    <div class="list-group list-group-links">
+                        <div class="list-group-header pb5 br-n"> 媒体库 </div>
+                        <a data-provider="{{ provider_remote is defined ? provider : '/' }}" href="#media-libs" data-toggle="tab" class="tab list-group-item">
+                            <i class="fa fa-gear"></i>
+                            媒体列表
+                        </a>
                     </div>
-
+                    <div class="list-group list-group-links">
+                        <div class="list-group-header pb5 br-n"> 上传文件 </div>
+                        <a data-provider="" href="#upload-picture" data-toggle="tab" class="tab list-group-item">
+                            <i class="fa fa-gear"></i>
+                            本地上传
+                        </a>
+                        <a data-provider="" href="#insert-url" data-toggle="tab" class="tab list-group-item">
+                            <i class="fa fa-envelope"></i>
+                            从URL插入
+                        </a>
+                    </div>
                 </div>
-                <div class="col-xs-5 text-right">
-                    <button type="button" id="mix-reset" class="btn btn-system mr5"><i class="fa fa-refresh"></i> 刷新</button>
-                </div>
-            </div>
-            <div class="mix-controls hidden">
-                <form class="controls admin-form" id="checkbox-filters">
-                    <!-- We can add an unlimited number of "filter groups" using the following format: -->
-
-                    <fieldset class="">
-                        <h4>Cars</h4>
-
-                        <label class="option block mt10">
-                            <input type="checkbox" value=".circle">
-                            <span class="checkbox"></span>Circle
-                        </label>
-
-                    </fieldset>
-
-                    <button id="mix-reset2">Clear All</button>
-                </form>
-
             </div>
         </div>
+        <div class="col-md-9 animated fadeIn">
+            <div class="tab-content">
+                <div id="media-libs" class="tab-pane active">
 
-        <div id="mix-container">
-
-            <div class="fail-message">
-                <span>No items were found matching the selected filters</span>
-            </div>
-            {% for media in medias %}
-            <div class="mix label1 folder1">
-                <div class="panel p6 pbn">
-                    <div class="of-h">
-                        <img src="{{ asset(media.path) }}" class="img-responsive" title="{{ media.name }}">
-                        <div class="row table-layout">
-                            <div class="col-xs-8 va-m pln">
-                                <h6>{{ media.name }}</h6>
-                            </div>
-                            <div class="col-xs-6 text-right va-m prn">
-                                <span class="fa fa-circle fs10 text-info ml10"></span>
-                                <span class="fa fa-eye-slash fs12 text-muted"></span>
-                                <span class="fa fa-remove fs12 text-muted"></span>
-                            </div>
+                </div>
+                <div id="upload-picture" class="tab-pane">
+                    <div action="{{ upload_url is defined ? upload_url : '/upload-file-url' }}" class="dropzone dropzone-sm dz-clickable" id="dropZone">
+                        <div class="dz-default dz-message"><span><i class="fa fa-cloud-upload"></i>          <span class="main-text"><b>Drop Files</b> to upload</span> <br>          <span class="sub-text">(or click)</span>         </span></div>
+                    </div>
+                </div>
+                <div id="insert-url" class="tab-pane">
+                    <div class="admin-form">
+                        <div class="section mb15">
+                            <label for="store-url" class="field prepend-icon">
+                                <input type="text" name="store-url" id="store-url" class="note-image-url gui-input" value="http://myonlinestore.com">
+                                <label for="store-url" class="field-icon">
+                                    <i class="fa fa-globe"></i>
+                                </label>
+                            </label>
                         </div>
                     </div>
-
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
-    </div>
-
-    <aside class="tray tray-right tray320" data-tray-height="match">
-
-        <h4 class="tray-title"> 上传 </h4>
-
-        <!-- Image Upload Field -->
-        <div class="fileupload fileupload-new admin-form mt20" data-provides="fileupload">
-            <div class="row">
-                <div class="col-xs-4">
-                <span class="button btn-system btn-file btn-block ph5 btn-modal" data-href="#modal-category">
-                  <span class="fileupload-new " >选择</span>
-                  <span class="fileupload-exists">修改</span>
-                  <input type="button">
-                </span>
                 </div>
             </div>
         </div>
-        <br>
-        <!-- Labels Menu -->
-        <div class="list-group list-group-links">
-            <div class="list-group-header"> Labels </div>
-            <a href="#" class="list-group-item">
-                Clients
-                <span class="badge badge-info">6</span>
-            </a>
-            <a href="#" class="list-group-item">
-                Contractors
-                <span class="badge badge-success">8</span>
-            </a>
-            <a href="#" class="list-group-item">
-                Employees
-                <span class="badge badge-primary">11</span>
-            </a>
-            <a href="#" class="list-group-item">
-                Suppliers
-                <span class="badge badge-system">13</span>
-            </a>
-        </div>
-
-    </aside>
-    <div id="modal-category" class="popup-basic popup-xl admin-form mfp-with-anim mfp-hide">
-        <div class="panel">
-            <div class="panel-heading">
-              <span class="panel-title">
-                <i class="fa fa-rocket"></i>Portlet Drag and Drop Uploader</span>
-            </div>
-            <!-- end .panel-heading section -->
-
-            <div class="panel-body p25">
-                <form action="{{ url('media_upload_v1') }}" class="dropzone dropzone-sm dz-clickable" id="dropZone">
-                    <div class="dz-default dz-message">
-                        <span>
-                            <i class="fa fa-cloud-upload"></i>
-                            <span class="main-text"><b>Drop Files</b> to upload</span> <br>
-                            <span class="sub-text">(or click)</span>
-                        </span>
-                    </div>
-                </form>
-                <!-- end section row section -->
-            </div>
-            <!-- end .form-body section -->
-
-            <div class="panel-footer">
-            </div>
-            <!-- end .form-footer section -->
-
-        </div>
-        <!-- end: .panel -->
     </div>
-{% endblock %}
-{% block plugins_js %}
-    <!-- Mixitup Plugin -->
-    <script src="{{ asset('assetbundle/vendor/plugins/mixitup/jquery.mixitup.min.js') }}"></script>
-
-    <!-- Page Plugins -->
-    <script src="{{ asset('assetbundle/vendor/plugins/magnific/jquery.magnific-popup.js') }}"></script>
-    <script src="{{ asset('assetbundle/vendor/plugins/fileupload/fileupload.js') }}"></script>
-    <script src="{{ asset('assetbundle/vendor/plugins/dropzone/dropzone.min.js') }}"></script>
-    <script src="{{ asset('assetbundle/vendor/plugins/holder/holder.min.js') }}"></script>
-{% endblock %}
-{% block ready_js %}
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-
-        "use strict";
-
-        // Init Theme Core
-        Core.init();
-
-        // Init Demo JS
-        Demo.init();
-
-        // To keep our code clean and modular, all custom functionality will be
-        // contained inside a single object literal called "dropdownFilter".
-        var dropdownFilter = {
-
-            // Declare any variables we will need as properties of the object
-            $filters: null,
-            $reset: null,
-            groups: [],
-            outputArray: [],
-            outputString: '',
-
-            // The "init" method will run on document ready and cache any jQuery objects we will need.
-            init: function() {
-                var self = this; // As a best practice, in each method we will asign "this" to the variable "self" so that it remains scope-agnostic. We will use it to refer to the parent "dropdownFilter" object so that we can share methods and properties between all parts of the object.
-
-                self.$filters = $('#select-filters');
-                self.$reset = $('#mix-reset');
-                self.$container = $('#mix-container');
-
-                self.$filters.find('fieldset').each(function() {
-                    self.groups.push({
-                        $dropdown: $(this).find('select'),
-                        active: ''
-                    });
-                });
-
-                self.bindHandlers();
-            },
-
-            // The "bindHandlers" method will listen for whenever a select is changed.
-            bindHandlers: function() {
-                var self = this;
-
-                // Handle select change
-                self.$filters.on('change', 'select', function(e) {
-                    e.preventDefault();
-
-                    self.parseFilters();
-                });
-
-                // Handle reset click
-                self.$reset.on('click', function(e) {
-                    e.preventDefault();
-
-                    self.$filters.find('select').val('');
-
-                    self.parseFilters();
-                });
-            },
-
-            // The parseFilters method pulls the value of each active select option
-            parseFilters: function() {
-                var self = this;
-
-                // loop through each filter group and grap the value from each one.
-                for (var i = 0, group; group = self.groups[i]; i++) {
-                    group.active = group.$dropdown.val();
-                }
-
-                self.concatenate();
-            },
-
-            // The "concatenate" method will crawl through each group, concatenating filters as desired:
-            concatenate: function() {
-                var self = this;
-
-                self.outputString = ''; // Reset output string
-
-                for (var i = 0, group; group = self.groups[i]; i++) {
-                    self.outputString += group.active;
-                }
-
-                // If the output string is empty, show all rather than none:
-                !self.outputString.length && (self.outputString = 'all');
-
-                //console.log(self.outputString);
-                // ^ we can check the console here to take a look at the filter string that is produced
-
-                // Send the output string to MixItUp via the 'filter' method:
-                if (self.$container.mixItUp('isLoaded')) {
-                    self.$container.mixItUp('filter', self.outputString);
-                }
-            }
-        };
-
-        // To keep our code clean and modular, all custom functionality will be contained inside a single object literal called "checkboxFilter".
-        var checkboxFilter = {
-
-            // Declare any variables we will need as properties of the object
-            $filters: null,
-            $reset: null,
-            groups: [],
-            outputArray: [],
-            outputString: '',
-
-            // The "init" method will run on document ready and cache any jQuery objects we will need.
-            init: function() {
-                var self = this; // As a best practice, in each method we will asign "this" to the variable "self" so that it remains scope-agnostic. We will use it to refer to the parent "checkboxFilter" object so that we can share methods and properties between all parts of the object.
-
-                self.$filters = $('#checkbox-filters');
-                self.$reset = $('#mix-reset2');
-                self.$container = $('#mix-container');
-
-                self.$filters.find('fieldset').each(function() {
-                    self.groups.push({
-                        $inputs: $(this).find('input'),
-                        active: [],
-                        tracker: false
-                    });
-                });
-
-                self.bindHandlers();
-            },
-
-            // The "bindHandlers" method will listen for whenever a form value changes.
-            bindHandlers: function() {
-                var self = this;
-
-                self.$filters.on('change', function() {
-                    self.parseFilters();
-                });
-
-                self.$reset.on('click', function(e) {
-                    e.preventDefault();
-                    self.$filters[0].reset();
-                    self.parseFilters();
-                });
-            },
-
-            // The parseFilters method checks which filters are active in each group:
-            parseFilters: function() {
-                var self = this;
-
-                // loop through each filter group and add active filters to arrays
-                for (var i = 0, group; group = self.groups[i]; i++) {
-                    group.active = []; // reset arrays
-                    group.$inputs.each(function() {
-                        $(this).is(':checked') && group.active.push(this.value);
-                    });
-                    group.active.length && (group.tracker = 0);
-                }
-
-                self.concatenate();
-            },
-
-            // The "concatenate" method will crawl through each group, concatenating filters as desired:
-            concatenate: function() {
-                var self = this,
-                        cache = '',
-                        crawled = false,
-                        checkTrackers = function() {
-                            var done = 0;
-
-                            for (var i = 0, group; group = self.groups[i]; i++) {
-                                (group.tracker === false) && done++;
-                            }
-
-                            return (done < self.groups.length);
-                        },
-                        crawl = function() {
-                            for (var i = 0, group; group = self.groups[i]; i++) {
-                                group.active[group.tracker] && (cache += group.active[group.tracker]);
-
-                                if (i === self.groups.length - 1) {
-                                    self.outputArray.push(cache);
-                                    cache = '';
-                                    updateTrackers();
-                                }
-                            }
-                        },
-                        updateTrackers = function() {
-                            for (var i = self.groups.length - 1; i > -1; i--) {
-                                var group = self.groups[i];
-
-                                if (group.active[group.tracker + 1]) {
-                                    group.tracker++;
-                                    break;
-                                } else if (i > 0) {
-                                    group.tracker && (group.tracker = 0);
-                                } else {
-                                    crawled = true;
-                                }
-                            }
-                        };
-
-                self.outputArray = []; // reset output array
-
-                do {
-                    crawl();
-                }
-                while (!crawled && checkTrackers());
-
-                self.outputString = self.outputArray.join();
-
-                // If the output string is empty, show all rather than none:
-                !self.outputString.length && (self.outputString = 'all');
-
-                //console.log(self.outputString);
-                // ^ we can check the console here to take a look at the filter string that is produced
-
-                // Send the output string to MixItUp via the 'filter' method:
-                if (self.$container.mixItUp('isLoaded')) {
-                    self.$container.mixItUp('filter', self.outputString);
-                }
-            }
-        };
-
-        // modal
-        $('.btn-modal').on('click', function() {
-            $(this).addClass('active-animation item-checked');
-            // Inline Admin-Form example
-            $.magnificPopup.open({
-                removalDelay: 500, //delay removal by X to allow out-animation,
-                items: {
-                    src: $(this).attr('data-href')
-                },
-                // overflowY: 'hidden', //
-                callbacks: {
-                    beforeOpen: function(e) {
-                        this.st.mainClass = 'mfp-slideDown';
-                    },
-                    afterClose: function(){
-                        window.location.reload();
-                    }
-                },
-                midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-            });
-        });
-
-        // uploader
-        var url = $('#dropZone').attr('action');
-        $("dropZone").dropzone({ url: url });
-
-        // Init multiselect plugin on filter dropdowns
-        $('#filter1').multiselect({
-            buttonClass: 'btn btn-default',
-        });
-        $('#filter2').multiselect({
-            buttonClass: 'btn btn-default',
-        });
-
-        // Init checkboxFilter code
-        checkboxFilter.init();
-
-        // Init dropdownFilter code
-        dropdownFilter.init();
-
-        var $container = $('#mix-container'), // mixitup container
-                $toList = $('.to-list'), // list view button
-                $toGrid = $('.to-grid'); // list view button
-
-        // Instantiate MixItUp
-        $container.mixItUp({
-            controls: {
-                enable: false // we won't be needing these
-            },
-            animation: {
-                duration: 400,
-                effects: 'fade translateZ(-360px) stagger(45ms)',
-                easing: 'ease'
-            },
-            callbacks: {
-                onMixFail: function() {}
-            }
-        });
-
-        $toList.on('click', function() {
-            if ($container.hasClass('list')) {
-                return
-            }
-            $container.mixItUp('changeLayout', {
-                display: 'block',
-                containerClass: 'list'
-            }, function(state) {
-                // callback function
-            });
-        });
-        $toGrid.on('click', function() {
-            if ($container.hasClass('grid')) {
-                return
-            }
-            $container.mixItUp('changeLayout', {
-                display: 'inline-block',
-                containerClass: 'grid'
-            }, function(state) {
-                // callback function
-            });
-        });
-
-        // Add Gallery Item to Lightbox
-        $('.mix img').magnificPopup({
-            type: 'image',
-            callbacks: {
-                beforeOpen: function(e) {
-                    // we add a class to body to indicate overlay is active
-                    // We can use this to alter any elements such as form popups
-                    // that need a higher z-index to properly display in overlays
-                    $('body').addClass('mfp-bg-open');
-
-                    // Set Magnific Animation
-                    this.st.mainClass = 'mfp-zoomIn';
-
-                    // Inform content container there is an animation
-                    this.contentContainer.addClass('mfp-with-anim');
-                },
-                afterClose: function(e) {
-
-                    setTimeout(function() {
-                        $('body').removeClass('mfp-bg-open');
-                        $(window).trigger('resize');
-                    }, 1000)
-
-                },
-                elementParse: function(item) {
-                    // Function will fire for each target element
-                    // "item.el" is a target DOM element (if present)
-                    // "item.src" is a source that you may modify
-                    item.src = item.el.attr('src');
-                },
-            },
-            overflowY: 'scroll',
-            removalDelay: 200, //delay removal by X to allow out-animation
-            prependTo: $('#content_wrapper')
-        });
-
+</section>
+<script>
+    $(function () {
+        var url = $('[href="#media-libs"]').attr('data-provider');
+        $.get(url, function (response) {
+            $('#media-libs').html(response)
+        }, 'html');
     });
 </script>
-<!-- END: PAGE SCRIPTS -->
 {% endblock %}

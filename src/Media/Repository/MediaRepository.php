@@ -14,10 +14,12 @@
 
 namespace Media\Repository;
 
+use FastD\Database\Pagination\QueryPagination;
 use FastD\Database\Repository\Repository;
 use Media\Std\MediaInterface;
+use Media\Std\ProviderInterface;
 
-class MediaRepository extends Repository implements MediaInterface
+class MediaRepository extends Repository implements MediaInterface,ProviderInterface
 {
     protected $media;
 
@@ -96,5 +98,10 @@ class MediaRepository extends Repository implements MediaInterface
     public function getCategories()
     {
         // TODO: Implement getCategories() method.
+    }
+
+    public function getMedia($page, $offset, $limited, $lastId)
+    {
+        return [];
     }
 }

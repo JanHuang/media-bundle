@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: janhuang
- * Date: 15/7/25
- * Time: 下午11:50
+ * Date: 15/9/15
+ * Time: 上午10:57
  * Github: https://www.github.com/janhuang
  * Coding: https://www.coding.net/janhuang
  * SegmentFault: http://segmentfault.com/u/janhuang
@@ -12,12 +12,9 @@
  * WebSite: http://www.janhuang.me
  */
 
-namespace Media\Events;
+namespace Media\Std;
 
-class Media
+interface ProviderInterface
 {
-    public function buildFields()
-    {
-
-    }
+    public function getMedia($page, $offset, $limited, $lastId);
 }

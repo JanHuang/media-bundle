@@ -52,6 +52,7 @@ class Uploader extends RestEvent
             'img'=> new \CURLFile($file->getPath() . '/' . $file->getFilename()),
             'prefix' => $prefix
         );
+
         $launcher = $request->createRequest($url, $data, 5);
         $response = $launcher->post();
 
@@ -114,9 +115,9 @@ class Uploader extends RestEvent
 
         $uploadedFiles = $request->getUploader(
             [
-                'path' => $this->getParameters('uploaded.path'),
-                'exts' => $this->getParameters('uploaded.exts'),
-                'size' => $this->getParameters('uploaded.size')
+                'path' => $this->getParameters('media.uploaded.path'),
+                'exts' => $this->getParameters('media.uploaded.exts'),
+                'size' => $this->getParameters('media.uploaded.size')
             ]
         )->uploading();
 
@@ -131,8 +132,8 @@ class Uploader extends RestEvent
         }
 
         try {
-            $repository = $this->getParameters('media.repository');
-            $connection = $this->getParameters('media.connection');
+            $repository = $this->getParameters('media.provider.repository');
+            $connection = $this->getParameters('media.provider.connection');
             $mediaRepository = $this->getConnection($connection)->getRepository($repository);
         } catch (\Exception $e) {
             $mediaRepository = null;
@@ -152,8 +153,8 @@ class Uploader extends RestEvent
 
         return $this->responseJson([
             'id'            => $id,
-            'url'           => $this->asset($relativePath, $this->getParameters('media.resrouces_url')),
-            'thumb'         => $this->asset($thumb, $this->getParameters('media.resrouces_url')),
+            'url'           => $this->asset($relativePath, $this->getParameters('media.resources_url')),
+            'thumb'         => $this->asset($thumb, $this->getParameters('media.resources_url')),
             'remote_url'    => $remoteUrl
         ]);
     }
