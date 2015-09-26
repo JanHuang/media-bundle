@@ -92,7 +92,7 @@ class Uploader extends RestEvent
             return $interface->insert([
                 $interface->getFieldOriginalName()=> $file->getOriginalName(),
                 $interface->getFieldSaveName()    => $file->getFilename(),
-                $interface->getFieldSavePath()    => $interface,
+                $interface->getFieldSavePath()    => str_replace(DIRECTORY_SEPARATOR, '/', $file->getRelativePath()),
                 $interface->getFieldThumbnilPath()=> $thumb,
                 $interface->getFieldHash()        => $file->getHash(),
                 $interface->getFieldSize()        => $file->getSize(),

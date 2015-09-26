@@ -4,6 +4,7 @@ CREATE TABLE fastd_media(
   save_name VARCHAR(40) NOT NULL ,
   hash VARCHAR(40) NOT NULL,
   path VARCHAR(60) not NULL,
+  thumb VARCHAR(60) NOT NULL DEFAULT '',
   size INT NOT NULL ,
   ext VARCHAR(10) NOT NULL ,
   create_at int(10) NOT NULL DEFAULT 0,
