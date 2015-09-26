@@ -18,7 +18,7 @@
         "fastd/fastd-module": "1.0.*@BETA",
         "fastd/framework": "1.4.*@BETA",
         "fastd/http": "1.0.*@BETA",
-        "fastd/asset-bundle": "0.1.x-dev"
+        "fastd/asset-bundle": "~1.0.0"
     },
     "extra": {
         "branch-alias": {
